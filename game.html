@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="game.css" rel="stylesheet" type="text/css">
+    <title>Lost In Pyramid</title>
+</head>
+<body>
+    <p id="result"></p>
+    <input type="text" id="text1">
+    <input type="button" value="Valider" onclick="checkEnd()" id="text2">
+    <div id="transition"></div>
+    <div class="game">
+        <div class="main_character">
+            <img src="protag.png" id="img_protag">
+        </div>
+        <div class="god">
+            <img src="osiris.png" id="img_god">
+        </div>
+        <div id="dialog">
+            <img src="textbox_intro.png" id="img_textbox">
+            <p id="dialog_text"></p>
+        </div>
+        <div id="choices">
+            <div id="choices1">
+                <img src="button.png" id="choice1">
+                <p id="text_choice1">,xsodjdzdopdzaodd,</p>
+            </div>
+            <div id="choices2">
+                <img src="button.png" id="choice2">
+                <p id="text_choice2">fek,feznfu</p>
+            </div>
+            <div id="choices3">
+                <img src="button.png" id="choice3">
+            <p id="text_choice3">ezeaeazeeazae</p>
+            </div>
+            <div id="choices4">
+                <img src="button.png" id="choice4">
+                <p id="text_choice4">la rivière</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        var Horus;
+        var Hathor;
+        var Amon;
+        var event = "mousemove";
+        var audio = document.createElement("AUDIO");
+            document.body.appendChild(audio);
+            audio.src = "main_theme.mp3";
+
+            document.body.addEventListener(event, function () {
+                audio.play()
+            })
+        function clearPage(){
+            document.getElementById("img_god").style.display="none";
+            document.getElementById("img_textbox").style.display="none";
+            document.getElementById("choices").style.display="none";
+            document.getElementById("img_protag").style.display="none";
+            document.getElementById("result").style.display="none";
+            document.getElementById("text1").style.display="none";
+            document.getElementById("text2").style.display="none";
+        }
+        function displayCharacter(){
+            document.getElementById("img_protag").style.display="block";
+        }
+        function displayGod(godname){
+            document.getElementById("img_god").src = `${godname}.png`;
+            document.getElementById("img_god").style.display="block";
+        }
+        function displayDialogBox(text, displaytype){
+            document.getElementById("img_textbox").src = `${displaytype}.png`
+            document.getElementById("img_textbox").style.display="block";
+            var quoteArray = [text];
+            var textPosition = 0; 
+            var speed = 50;
+            typewriter = () => {
+                document.getElementById("dialog_text").innerHTML = quoteArray[0].substring(0, textPosition) + '<span>\u25AE</span>';
+                if(textPosition++ != quoteArray[0].length)
+                    setTimeout(typewriter, speed);
+                }
+            typewriter();
+        }
+        function changeBackground(background_name){
+            document.body.style.backgroundImage = `url('${background_name}.png')`;
+            document.body.style.backgroundRepeat = "no-repeat";
+            document.body.style.backgroundPosition = "center top";
+        }
+        function firstCutScene(){
+            clearPage();
+            document.body.style.backgroundColor="#211000";
+            displayDialogBox(" Nous allons vous plonger dans une histoire, votre histoire. Celle d’un grand archéologue partant à l’aventure à la recherche du trésor maudit du pharaon Markhuss III. Après des années à étudier cette étendue désertique et ses secrets, vous vous êtes enfin décidé à partir explorer ces dunes pour le voyage de votre vie. Suite à une longue traversée du désert, vous atteignez enfin cet antique monument.", "textbox_intro");
+            changeBackground("intro1");
+            document.getElementById("text_choice1").style.display="none";
+            document.getElementById("text_choice2").style.display="none";
+            document.getElementById("text_choice3").style.display="none";
+            document.getElementById("text_choice4").style.display="none";
+            document.getElementById("choices1").style.display="none";
+            document.getElementById("choices2").style.display="none";
+            document.getElementById("choices3").style.display="none";
+            document.getElementById("choices4").style.display="none";
+        }
+        function secondCutScene(){
+            clearPage();
+            document.body.style.backgroundColor="#110700";
+            displayDialogBox("Pris d’enthousiasme à l’idée d’avoir enfin atteint l’emplacement de ce trésor que vous convoitez tant, vous vous empressez de vous plonger dans l’inconnu.", "textbox_intro");
+            changeBackground("intro2");
+            document.getElementById("text_choice1").style.display="none";
+            document.getElementById("text_choice2").style.display="none";
+            document.getElementById("text_choice3").style.display="none";
+            document.getElementById("text_choice4").style.display="none";
+            document.getElementById("choices1").style.display="none";
+            document.getElementById("choices2").style.display="none";
+            document.getElementById("choices3").style.display="none";
+            document.getElementById("choices4").style.display="none";
+        }
+        function thirdCutScene(){
+            clearPage();
+            document.body.style.backgroundColor="#0F0905";
+            displayDialogBox("Alors que vous vous enfoncez dans les profondeurs du tombeau, l’obscurité s’accompagne d’un sentiment d’oppression. Vous sentez que vous n’êtes pas le bienvenu en ces lieux. Cependant, il est trop tard pour rebrousser chemin, et vous continuez votre quête.", "textbox_intro");
+            changeBackground("intro3");
+            document.getElementById("text_choice1").style.display="none";
+            document.getElementById("text_choice2").style.display="none";
+            document.getElementById("text_choice3").style.display="none";
+            document.getElementById("text_choice4").style.display="none";
+            document.getElementById("choices1").style.display="none";
+            document.getElementById("choices2").style.display="none";
+            document.getElementById("choices3").style.display="none";
+            document.getElementById("choices4").style.display="none";
+        }
+        function fourthCutScene(){
+            clearPage();
+            document.body.style.backgroundColor="#211000";
+            displayDialogBox("Enfin ! Après tous ces efforts vous arrivez à mettre main sur ce légendaire trésor, rempli de merveilles en tous genres. Vous vous approchez du sarcophage doré recouvert de poussière, mais malgré votre joie, un sentiment de malaise subsiste.", "textbox_intro");
+            changeBackground("intro4");
+            document.getElementById("text_choice1").style.display="none";
+            document.getElementById("text_choice2").style.display="none";
+            document.getElementById("text_choice3").style.display="none";
+            document.getElementById("text_choice4").style.display="none";
+            document.getElementById("choices1").style.display="none";
+            document.getElementById("choices2").style.display="none";
+            document.getElementById("choices3").style.display="none";
+            document.getElementById("choices4").style.display="none";
+        }
+        function fifthCutScene(){
+            clearPage();
+            document.body.style.backgroundColor="#16332B";
+            displayDialogBox("Dans un éclat de flammes maudites, une figure imposante apparaît devant vous. Pris de surprise, vous reculez de quelques pas. Anubis : « Pauvre mortel ! Tu as osé profaner le tombeau sacré de Markhuss III ! Au nom des Dieux, je te maudis ! Remporte nos épreuves si tu souhaite sortir d’ici vivant ! »", "textbox_intro");
+            changeBackground("intro5");
+            document.getElementById("text_choice1").style.display="none";
+            document.getElementById("text_choice2").style.display="none";
+            document.getElementById("text_choice3").style.display="none";
+            document.getElementById("text_choice4").style.display="none";
+            document.getElementById("choices1").style.display="none";
+            document.getElementById("choices2").style.display="none";
+            document.getElementById("choices3").style.display="none";
+            document.getElementById("choices4").style.display="none";
+        }
+        function triggerAnimationFadeIn (){
+            document.getElementById("transition").style.animation="FadeIn 2s";
+        }
+        function triggerAnimationFadeOut(){
+            document.getElementById("transition").style.animation="FadeOut 2s";
+        }
+        function display2Choices(){
+            document.getElementById('choice1').style.display="none";
+            document.getElementById('choice4').style.display="none";
+            document.getElementById('text_choice1').style.display="none";
+            document.getElementById('text_choice4').style.display="none";
+        }
+        function displayAllChoices(){
+            document.getElementById('choice1').style.display="block";
+            document.getElementById('choice2').style.display="block";
+            document.getElementById('choice3').style.display="block";
+            document.getElementById('choice4').style.display="block";
+        }
+        function doors(){
+            audio.play();
+            document.getElementById("text_choice1").style.display="block";
+            document.getElementById("text_choice2").style.display="block";
+            document.getElementById("text_choice3").style.display="block";
+            document.getElementById("text_choice4").style.display="block";
+            document.getElementById("choices1").style.display="block";
+            document.getElementById("choices2").style.display="block";
+            document.getElementById("choices3").style.display="block";
+            document.getElementById("choices4").style.display="block";
+            clearPage();
+            /* change background color */
+            document.body.style.backgroundColor="#211000";
+            changeBackground("2portes");
+            /* replace textbox and dialog */
+            document.getElementById('img_textbox').style.top="70%";
+            document.getElementById('dialog_text').style.color="black";
+            document.getElementById('dialog_text').style.top="70%";
+            displayDialogBox("Vous vous réveillez, 2 portes se tiennent face à vous. Une porte est ornée de l’ankh qui est le symbole de la vie et l’autre ornée du sceptre heka  et  nekhakha qui représentent le pouvoir et l’autorité des rois d'Egypte. Quelle porte choisissez vous ?", "textbox_game");
+            display2Choices();
+
+            /*add onclick */
+            document.getElementById("text_choice2").innerHTML = "La porte de gauche";
+            document.getElementById("text_choice3").innerHTML = "La porte de droite";
+            document.getElementById("choice2").setAttribute("onclick", "sceneRa()");
+            document.getElementById("choice3").setAttribute("onclick", "sceneGeb()");
+        }
+        function sceneRa(){
+            clearPage();
+            changeBackground("god_room");
+            displayGod("ra");
+            displayCharacter();
+            displayDialogBox("Je suis Râ, dieu solaire et créateur de l'univers. Tu oses défier les dieux et leur puissance. Pour passer à l'épreuve suivante réponds à cette énigme :   Froid et muet Il symbolise à tort le péché et la mort Si sa tête nous effraie Sa peau peut orner nos pieds Qui est-il ?", "textbox_game");
+            displayAllChoices();
+            document.getElementById("text_choice1").innerHTML = "Le crocodile";
+            document.getElementById("text_choice2").innerHTML = "Le cobra";
+            document.getElementById("text_choice3").innerHTML = "Le tigre";
+            document.getElementById("text_choice4").innerHTML = "Le taureau";
+
+            document.getElementById("text_choice1").style.display="block";
+            document.getElementById("text_choice2").style.display="block";
+            document.getElementById("text_choice3").style.display="block";
+            document.getElementById("text_choice4").style.display="block";
+
+            document.getElementById("choice1").setAttribute("onclick", "doors()");
+            document.getElementById("choice2").setAttribute("onclick", "sceneSeth()");
+            document.getElementById("choice3").setAttribute("onclick", "doors()");
+            document.getElementById("choice4").setAttribute("onclick", "doors()");
+        }
+        function sceneSeth(){
+            clearPage();
+            changeBackground("god_room");
+            displayGod("seth");
+            displayCharacter();
+            displayDialogBox("Toi qui ose profaner cet endroit divin, sais-tu qui je suis ? Tu t'adresses à Seth, dieu du désert et de l'orge. Réponds à ma question et n’affronte pas la force de mes aïeux. Je n'ai qu'une couleur, mais mille formes. Collé au sol, je m'envole. Je suis le soleil, mais m'évade la nuit. Qui suis-je ?", "textbox_game");
+            displayAllChoices();
+
+            document.getElementById("text_choice1").innerHTML = "Une chauve-souris";
+            document.getElementById("text_choice2").innerHTML = "L'ombre";
+            document.getElementById("text_choice3").innerHTML = "La lune";
+            document.getElementById("text_choice4").innerHTML = "Le hibou";
+
+            document.getElementById("text_choice1").style.display="block";
+            document.getElementById("text_choice2").style.display="block";
+            document.getElementById("text_choice3").style.display="block";
+            document.getElementById("text_choice4").style.display="block";
+
+            document.getElementById("choice1").setAttribute("onclick", "doors()");
+            document.getElementById("choice2").setAttribute("onclick", "sceneStone()");
+            document.getElementById("choice3").setAttribute("onclick", "doors()");
+            document.getElementById("choice4").setAttribute("onclick", "doors()");
+        }
+        function sceneStone(){
+            clearPage();
+            changeBackground("pilliers");
+            displayCharacter();
+            displayDialogBox("Vous entrez dans une salle, des piliers se dressent au-dessus d’une fosse sans fond, l’un des 2 chemins est piégé. Quel chemin choisissez-vous ? ", "textbox_game");
+            display2Choices();
+
+            document.getElementById("text_choice2").innerHTML = "Le chemin de gauche";
+            document.getElementById("text_choice3").innerHTML = "Le chemin de droite";
+
+            document.getElementById("text_choice2").style.display="block";
+            document.getElementById("text_choice3").style.display="block";
+
+            document.getElementById("choice2").setAttribute("onclick", "sceneHorus()");
+            document.getElementById("choice3").setAttribute("onclick", "sceneOsiris()");
+        }
+        function sceneHorus(){
+            clearPage();
+            changeBackground("god_room");
+            displayCharacter();
+            displayGod("horus")
+            displayDialogBox("Un étranger ici ? Comment es-tu entré ?? Réponds à cette énigme ou tu périras dans le purgatoire. Qu'est-ce qui a un œil, mais ne peut pas voir ?", "textbox_game");
+            displayAllChoices();
+
+            document.getElementById("text_choice1").innerHTML = "Une peinture";
+            document.getElementById("text_choice2").innerHTML = "Une statue";
+            document.getElementById("text_choice3").innerHTML = "Un cyclone";
+            document.getElementById("text_choice4").innerHTML = "Un aveugle";
+
+            document.getElementById("text_choice1").style.display="block";
+            document.getElementById("text_choice2").style.display="block";
+            document.getElementById("text_choice3").style.display="block";
+            document.getElementById("text_choice4").style.display="block";
+
+            document.getElementById("choice1").setAttribute("onclick", "doors()");
+            document.getElementById("choice2").setAttribute("onclick", "doors()");
+            document.getElementById("choice3").setAttribute("onclick", "sceneSphynx()");
+            document.getElementById("choice4").setAttribute("onclick", "doors()");
+
+            document.getElementById("result").innerHTML="Horus"
+            window.alert("Dans cette salle vous trouvez l'ankh. Probablement un objet qui décidera de votre destin...");
+        }
+        function sceneAnubis(){
+            clearPage();
+            changeBackground("god_room");
+            displayCharacter();
+            displayGod("anubis")
+            displayDialogBox("Pas de dialogue pour le moment", "textbox_game");
+            displayAllChoices();
+
+            document.getElementById("text_choice1").innerHTML = "Une peinture";
+            document.getElementById("text_choice2").innerHTML = "Une statue";
+            document.getElementById("text_choice3").innerHTML = "Un cyclone";
+            document.getElementById("text_choice4").innerHTML = "Un aveugle";
+
+            document.getElementById("text_choice1").style.display="block";
+            document.getElementById("text_choice2").style.display="block";
+            document.getElementById("text_choice3").style.display="block";
+            document.getElementById("text_choice4").style.display="block";
+
+            document.getElementById("choice1").setAttribute("onclick", "doors()");
+            document.getElementById("choice2").setAttribute("onclick", "doors()");
+            document.getElementById("choice3").setAttribute("onclick", "sceneAnubis()");
+            document.getElementById("choice4").setAttribute("onclick", "doors()");
+        }
+        function sceneGeb(){
+            clearPage();
+            changeBackground("god_room");
+            displayGod("geb");
+            displayCharacter();
+            displayDialogBox("Qui es-tu ? As-tu l’autorisation pour fouler ces terres qui ne sont pas tiennes ? Trouve réponse à cette énigme et passe ton chemin, ou péris en enfer. Qu'est-ce qui s’allonge et se raccourcit en même temps ?", "textbox_game");
+            displayAllChoices();
+
+            document.getElementById("text_choice1").innerHTML = "Le temps";
+            document.getElementById("text_choice2").innerHTML = "La vie";
+            document.getElementById("text_choice3").innerHTML = "La marée";
+            document.getElementById("text_choice4").innerHTML = "La journée";
+
+            document.getElementById("text_choice1").style.display="block";
+            document.getElementById("text_choice2").style.display="block";
+            document.getElementById("text_choice3").style.display="block";
+            document.getElementById("text_choice4").style.display="block";
+
+            document.getElementById("choice1").setAttribute("onclick", "doors()");
+            document.getElementById("choice2").setAttribute("onclick", "sceneIsis()");
+            document.getElementById("choice3").setAttribute("onclick", "doors()");
+            document.getElementById("choice4").setAttribute("onclick", "doors()");
+        }
+        function sceneIsis(){
+            clearPage();
+            changeBackground("god_room");
+            displayGod("isis");
+            displayCharacter();
+            displayDialogBox("Oh petit mortel que fais tu sur la terre de mes ancêtres, réponds à mon énigme, je te laisserais en paix. On les voit sans pouvoir les compter. Si on les voit mourir, on ne les voit pas naître. Elles peuvent tuer ou caresser. Qui sont-elles ?", "textbox_game");
+            displayAllChoices();
+
+            document.getElementById("text_choice1").innerHTML = "Les nuages";
+            document.getElementById("text_choice2").innerHTML = "Le vent";
+            document.getElementById("text_choice3").innerHTML = "Les vagues";
+            document.getElementById("text_choice4").innerHTML = "Le feu";
+
+            document.getElementById("text_choice1").style.display="block";
+            document.getElementById("text_choice2").style.display="block";
+            document.getElementById("text_choice3").style.display="block";
+            document.getElementById("text_choice4").style.display="block";
+
+            document.getElementById("choice1").setAttribute("onclick", "doors()");
+            document.getElementById("choice2").setAttribute("onclick", "doors()");
+            document.getElementById("choice3").setAttribute("onclick", "sceneDalle()");
+            document.getElementById("choice4").setAttribute("onclick", "doors()");
+        }
+        function sceneDalle(){
+            clearPage();
+            changeBackground("dalle");
+            displayDialogBox("Vous entrez dans une salle, vous voyez une dalle au sol, elle vous intrigue, vous pouvez choisir de marcher dessus ou de la contourner, que choisissez-vous ? Choisissez vous de marcher dessus ou de la contourner minutieusement ?", "textbox_game");
+            display2Choices();
+
+            document.getElementById("text_choice2").innerHTML = "Marcher dessus";
+            document.getElementById("text_choice3").innerHTML = "Contourner";
+
+            document.getElementById("text_choice2").style.display="block";
+            document.getElementById("text_choice3").style.display="block";
+
+            document.getElementById("choice2").setAttribute("onclick", "sceneOsiris()");
+            document.getElementById("choice3").setAttribute("onclick", "sceneHathor()");
+            
+        }
+        function sceneOsiris(){
+            clearPage();
+            changeBackground("god_room");
+            displayGod("osiris");
+            displayDialogBox("Vous entrez dans une salle, vous voyez une dalle au sol, elle vous intrigue, vous pouvez choisir de marcher dessus ou de la contourner, que choisissez-vous ? Choisissez vous de marcher dessus ou de la contourner minutieusement ?", "textbox_game");
+            displayAllChoices();
+
+            document.getElementById("text_choice1").innerHTML = "L'arrivée";
+            document.getElementById("text_choice2").innerHTML = "L'amour";
+            document.getElementById("text_choice3").innerHTML = "La mort";
+            document.getElementById("text_choice4").innerHTML = "La virginité";
+
+            document.getElementById("text_choice1").style.display="block";
+            document.getElementById("text_choice2").style.display="block";
+            document.getElementById("text_choice3").style.display="block";
+            document.getElementById("text_choice4").style.display="block";
+
+            document.getElementById("choice1").setAttribute("onclick", "doors()");
+            document.getElementById("choice2").setAttribute("onclick", "doors()");
+            document.getElementById("choice3").setAttribute("onclick", "sceneAmon()");
+            document.getElementById("choice4").setAttribute("onclick", "doors()");
+        }
+        function sceneAmon(){
+            clearPage();
+            changeBackground("god_room");
+            displayGod("amon");
+            displayDialogBox("Simple mortel, mon nom est Amon, mon histoire n’a que d’égale que ma puissance, tu as réussi à venir jusqu’ici, voyons si tu es digne de continuer ta route. Celui qui me fait me vend, celui qui m’achète ne se sert pas de moi et celui qui se sert de moi ne le sait pas.", "textbox_game");
+            displayAllChoices();
+
+            document.getElementById("text_choice1").innerHTML = "Le temps";
+            document.getElementById("text_choice2").innerHTML = "Winrar";
+            document.getElementById("text_choice3").innerHTML = "Un cercueil";
+            document.getElementById("text_choice4").innerHTML = "Un incinérateur";
+
+            document.getElementById("text_choice1").style.display="block";
+            document.getElementById("text_choice2").style.display="block";
+            document.getElementById("text_choice3").style.display="block";
+            document.getElementById("text_choice4").style.display="block";
+
+            document.getElementById("choice1").setAttribute("onclick", "doors()");
+            document.getElementById("choice2").setAttribute("onclick", "doors()");
+            document.getElementById("choice3").setAttribute("onclick", "sceneSphynx()");
+            document.getElementById("choice4").setAttribute("onclick", "doors()");
+            document.getElementById("result").innerHTML="Amon";
+        }
+        function sceneSphynx(){
+            clearPage();
+            changeBackground("sphynx");
+            document.getElementById("text1").style.display="block";
+            document.getElementById("text2").style.display="block";
+            audio.src = "sphinxaudio.mp3";
+            document.getElementById("text_choice1").style.display="none";
+            document.getElementById("text_choice2").style.display="none";
+            document.getElementById("text_choice3").style.display="none";
+            document.getElementById("text_choice4").style.display="none";
+            document.getElementById("choices1").style.display="none";
+            document.getElementById("choices2").style.display="none";
+            document.getElementById("choices3").style.display="none";
+            document.getElementById("choices4").style.display="none";
+            document.getElementById("dialog_text").style.display="none";
+        }
+        function finNeutre(){
+            clearPage();
+            changeBackground("badend");
+        }
+        function finMauvaise(){
+            clearPage();
+            changeBackground("cursed");
+        }
+        function finBonne(){
+            clearPage();
+            changeBackground("exit");
+        }
+        function checkEnd(){
+            console.log(document.getElementById("result").value);
+            if(document.getElementById("result").value=="Hathor"){
+                console.log("Hathor");
+                finNeutre();
+            } else if (document.getElementById("result").value=="Amon"){
+                console.log("Amon");
+                finMauvaise();
+            } else if (document.getElementById("result").value=="Horus"){
+                console.log("Horus");
+                finBonne();
+            }
+        }
+        function sceneHathor(){
+            clearPage();
+            changeBackground("god_room");
+            displayGod("hathor");
+            displayDialogBox("T’es-tu égaré ? Laisse-moi t’aider à retrouver ton chemin, réponds juste à cette énigme et ne trouve pas de place en enfer parmi les âmes damnées. On en a tous besoin. Car sans lui, la vie n’est rien. Et dans les plus longs voyages. De l’autre, il a le doux visage. Qui est-il ?", "textbox_game");
+            displayAllChoices();
+
+            document.getElementById("text_choice1").innerHTML = "L'or";
+            document.getElementById("text_choice2").innerHTML = "Le rêve";
+            document.getElementById("text_choice3").innerHTML = "L'amour";
+            document.getElementById("text_choice4").innerHTML = "L'eau";
+
+            document.getElementById("text_choice1").style.display="block";
+            document.getElementById("text_choice2").style.display="block";
+            document.getElementById("text_choice3").style.display="block";
+            document.getElementById("text_choice4").style.display="block";
+
+            document.getElementById("choice1").setAttribute("onclick", "doors()");
+            document.getElementById("choice2").setAttribute("onclick", "doors()");
+            document.getElementById("choice3").setAttribute("onclick", "sceneSphynx()");
+            document.getElementById("choice4").setAttribute("onclick", "doors()");
+            document.getElementById("result").innerHTML="Hathor";
+            window.alert("Dans cette salle vous trouvez l'ankh. Probablement un objet qui décidera de votre destin...");
+            /*fin neutre*/
+        }
+        function intro(){
+            setTimeout(firstCutScene, 0);
+            setTimeout(triggerAnimationFadeIn, 24000);
+            setTimeout(triggerAnimationFadeOut, 26000);
+            setTimeout(secondCutScene, 26000);
+            setTimeout(triggerAnimationFadeIn, 40000);
+            setTimeout(triggerAnimationFadeOut, 42000);
+            setTimeout(thirdCutScene, 42000);
+            setTimeout(triggerAnimationFadeIn, 67000);
+            setTimeout(triggerAnimationFadeOut, 69000);
+            setTimeout(fourthCutScene, 69000);
+            setTimeout(triggerAnimationFadeIn, 95000);
+            setTimeout(triggerAnimationFadeOut, 97000);
+            setTimeout(fifthCutScene, 97000);
+            setTimeout(doors, 117000);
+        }
+        intro();
+    </script>
+</body>
+</html>

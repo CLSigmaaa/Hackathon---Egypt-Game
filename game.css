@@ -1,0 +1,127 @@
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+#img_god {
+    position: fixed;
+    height: 375px;
+    top: 14%;
+    left: 61%;
+    z-index: -3;
+}
+#img_textbox {
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -2;
+}
+#dialog_text {
+    position: fixed;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #F4E8A8;
+    font: 1.2em "Georgia";
+    z-index: -1;
+}
+#transition {
+    background-color:  black;
+    opacity: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 20;
+    animation: idle 2s;
+}
+#choices {
+    position: fixed;
+    display: flex !important;
+    width: 100%;
+    column-gap: 25px;
+    align-items: center;
+    justify-content: center;
+    top: 87% !important;
+}
+#choice1{
+    position: relative;
+}
+#text_choice1{
+    position: absolute;
+    top: 15%;
+    left: 23%;
+    color: #F4E8A8;
+    font: 1em "Georgia";
+    z-index: 20;
+}
+#choice2{
+    position: relative;
+}
+#text_choice2{
+    position: absolute;
+    top: 15%;
+    left: 37.5%;
+    color: #F4E8A8;
+    font: 1em "Georgia";
+    z-index: 20;
+}
+#choice3{
+    position: relative;
+}
+#text_choice3{
+    position: absolute;
+    top: 15%;
+    left: 52%;
+    color: #F4E8A8;
+    font: 1em "Georgia";
+    z-index: 20;
+}
+#choice4{
+    position: relative;
+}
+#text_choice4{
+    position: absolute;
+    top: 15%;
+    left: 66.5%;
+    color: #F4E8A8;
+    font: 1em "Georgia";
+    z-index: 20;
+}
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+#img_protag {
+    position: fixed;
+    height: 375px;
+    top: 14%;
+    right: 61%;
+    z-index: -3;
+}
+
+#text1{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+#text2{
+    position: fixed;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+}
+@keyframes idle { 100% {} }
+@keyframes FadeOut{
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
